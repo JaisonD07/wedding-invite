@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joslin &amp; Nithin Wedding Invitation</title>
+  <meta name="description" content="Together with their families, invite you to celebrate their wedding.">
+
+  <!-- Open Graph preview: update the image URL after you upload preview.jpg online -->
+  <meta property="og:title" content="Joslin &amp; Nithin Wedding Invitation">
+  <meta property="og:description" content="Together with their families, invite you to celebrate their wedding">
+  <meta property="og:image" content="https://your-link/preview.jpg">
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="site-shell">
+    <button class="music-toggle" id="musicToggle" type="button" aria-label="Toggle background music">
+      Music On
+    </button>
+
+    <audio id="bgMusic" loop autoplay>
+      <!-- MUSIC: Replace music.mp3 with your wedding song -->
+      <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="sparkles" id="sparkles" aria-hidden="true"></div>
+
+    <section class="envelope-screen" id="envelopeScreen">
+      <div class="silk-overlay"></div>
+      <div class="envelope-stage">
+        <div class="envelope-wrapper" id="envelopeWrapper">
+          <div class="wax-seal"></div>
+          <div class="envelope">
+            <div class="envelope-back"></div>
+            <div class="envelope-letter" id="invitationCard">
+              <p class="letter-intro">Wedding Invitation</p>
+              <!-- NAMES: Edit the names below -->
+              <h1>Joslin &amp; Nithin</h1>
+              <!-- DATE: Edit the date below -->
+              <p class="letter-date">May 23, 2026</p>
+            </div>
+            <div class="envelope-flap"></div>
+            <div class="envelope-front"></div>
+          </div>
+        </div>
+
+        <div class="envelope-copy">
+          <p class="eyebrow">Together with their families</p>
+          <h2>A day wrapped in love, waiting to be opened.</h2>
+          <button class="open-button" id="openButton" type="button">Open</button>
+          <p class="auto-open-note">The invitation opens automatically in 5 seconds.</p>
+        </div>
+      </div>
+    </section>
+
+    <main class="invitation-page hidden" id="invitationPage">
+      <section class="hero-section" id="home">
+        <div class="hero-overlay"></div>
+        <div class="hero-content reveal">
+          <p class="intro-text">Together with their families</p>
+          <!-- NAMES: Edit the names below -->
+          <h1 class="couple-names">Joslin &amp; Nithin</h1>
+          <p class="hero-subtitle">Invite you to celebrate their wedding</p>
+          <!-- DATE: Edit the date below -->
+          <p class="hero-date">May 23, 2026</p>
+          <a class="scroll-link" href="#venues">View Celebration Details</a>
+        </div>
+      </section>
+
+      <section class="section" id="venues">
+        <div class="section-heading reveal">
+          <p class="section-label">Venue</p>
+          <h2>Where We Gather</h2>
+        </div>
+
+        <div class="venue-grid">
+          <article class="venue-card reveal">
+            <p class="card-label">Church Ceremony</p>
+            <!-- LOCATION: Edit the placeholder location text below -->
+            <h3>St. Mary's Church</h3>
+            <p>123 Celebration Street, Your City, Your State</p>
+            <!-- LOCATION LINK: Replace the query below with your church location -->
+            <button type="button" onclick="window.open('https://maps.google.com/?q=St.+Mary%27s+Church', '_blank')">View Location</button>
+          </article>
+
+          <article class="venue-card reveal">
+            <p class="card-label">Reception Hall</p>
+            <!-- LOCATION: Edit the placeholder location text below -->
+            <h3>Golden Blossom Hall</h3>
+            <p>456 Grand Avenue, Your City, Your State</p>
+            <!-- LOCATION LINK: Replace the query below with your reception location -->
+            <button type="button" onclick="window.open('https://maps.google.com/?q=Golden+Blossom+Hall', '_blank')">View Location</button>
+          </article>
+        </div>
+      </section>
+
+      <section class="section timeline-section" id="timeline">
+        <div class="section-heading reveal">
+          <p class="section-label">Celebration Flow</p>
+          <h2>Moments of the Day</h2>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-item reveal">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <h3>Church Mass</h3>
+              <!-- DATE/TIME: Edit the details below -->
+              <p>Date: May 23, 2026</p>
+              <p>Time: 09:30 AM</p>
+            </div>
+          </article>
+
+          <article class="timeline-item reveal">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <h3>Wedding Ceremony</h3>
+              <!-- DATE/TIME: Edit the details below -->
+              <p>Date: May 23, 2026</p>
+              <p>Time: 11:00 AM</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section quote-section" id="quote">
+        <div class="quote-card reveal">
+          <p class="section-label">Blessing</p>
+          <!-- QUOTE: Replace this quote with your preferred verse or message -->
+          <blockquote>
+            "Love is patient, love is kind..."
+          </blockquote>
+        </div>
+      </section>
+
+      <section class="section final-section" id="finalMessage">
+        <div class="final-card reveal">
+          <p>With Love,</p>
+          <p>We would be honored to have you join us</p>
+          <p>to celebrate the wedding of</p>
+          <!-- NAMES: Edit the names below -->
+          <h2>Joslin &amp; Nithin</h2>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
