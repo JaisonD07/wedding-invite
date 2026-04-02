@@ -4,169 +4,257 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Wedding Invitation</title>
+<title>Joslin & Nithin Wedding</title>
 
-<!-- PREVIEW (IMPORTANT) -->
+<!-- PREVIEW -->
 <meta property="og:title" content="Joslin & Nithin Wedding Invitation">
-<meta property="og:description" content="Together with their families invite you to celebrate their wedding">
+<meta property="og:description" content="Join us to celebrate our special day">
 <meta property="og:image" content="https://YOUR-VERCEL-LINK/preview.jpg">
 <meta property="og:type" content="website">
 
-<!-- FONTS -->
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
-body {
-  margin: 0;
-  font-family: 'Playfair Display', serif;
-  background: #F5EFE6;
-  color: #3E2F1C;
-  scroll-behavior: smooth;
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:'Playfair Display',serif;
+  background:#F5EFE6;
+  color:#2C2C2C;
+  overflow-x:hidden;
 }
 
 /* HERO */
-.hero {
-  height: 100vh;
-  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('hero.jpg') center/cover no-repeat;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  text-align: center;
+.hero{
+  height:100vh;
+  background:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url('hero.jpg') center/cover no-repeat;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  text-align:center;
+  animation:fadeIn 2s ease;
 }
 
-.hero h1 {
-  font-family: 'Great Vibes', cursive;
-  font-size: 60px;
-  margin: 10px 0;
+.hero h1{
+  font-family:'Great Vibes',cursive;
+  font-size:70px;
 }
 
-.hero p {
-  font-size: 18px;
+.hero p{
+  margin-top:10px;
+  font-size:18px;
 }
 
-/* SECTIONS */
-.section {
-  padding: 60px 20px;
-  text-align: center;
+/* CONTAINER */
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:20px;
 }
 
-/* CARDS */
-.card {
-  background: white;
-  margin: 20px auto;
-  padding: 20px;
-  max-width: 400px;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+/* CARD */
+.card{
+  background:white;
+  padding:30px;
+  margin:40px 0;
+  border-radius:16px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.1);
+  opacity:0;
+  transform:translateY(40px);
+  transition:0.8s;
+}
+
+.card.show{
+  opacity:1;
+  transform:translateY(0);
 }
 
 /* BUTTON */
-.btn {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 10px 20px;
-  background: #D4AF37;
-  color: white;
-  border-radius: 25px;
-  text-decoration: none;
+.btn{
+  display:inline-block;
+  margin-top:10px;
+  padding:10px 20px;
+  background:#D4AF37;
+  color:white;
+  border-radius:30px;
+  text-decoration:none;
+  transition:0.3s;
 }
 
-/* TIMELINE */
-.timeline {
-  margin-top: 20px;
+.btn:hover{
+  transform:scale(1.05);
+}
+
+/* GRID */
+.grid{
+  display:flex;
+  gap:20px;
+}
+
+@media(max-width:768px){
+  .grid{flex-direction:column;}
 }
 
 /* MUSIC BUTTON */
-.music-btn {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: #D4AF37;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 50%;
-  cursor: pointer;
+.music{
+  position:fixed;
+  top:20px;
+  right:20px;
+  background:#D4AF37;
+  border:none;
+  padding:12px;
+  border-radius:50%;
+  cursor:pointer;
+  color:white;
+}
+
+/* PARTICLES */
+canvas{
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:-1;
+}
+
+/* ANIMATION */
+@keyframes fadeIn{
+  from{opacity:0}
+  to{opacity:1}
 }
 </style>
 </head>
 
 <body>
 
+<canvas id="particles"></canvas>
+
 <!-- MUSIC -->
 <audio id="music" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
-<button class="music-btn" onclick="toggleMusic()">🎵</button>
+<button class="music" onclick="toggleMusic()">🎵</button>
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero" id="hero">
   <p>Together with their families</p>
   <h1>Joslin & Nithin</h1>
   <p>Invite you to celebrate their wedding</p>
   <p><b>May 23, 2026</b></p>
 </section>
 
-<!-- INVITATION -->
-<section class="section">
-  <h2>You're Invited</h2>
-  <p>We request the honor of your presence to celebrate this beautiful union.</p>
-</section>
-
-<!-- VENUE -->
-<section class="section">
-  <h2>Venue</h2>
+<!-- CONTENT -->
+<div class="container" id="main" style="display:none;">
 
   <div class="card">
-    <h3>Church Ceremony</h3>
-    <p>Sakleshpur Church (Edit later)</p>
-    <a class="btn" href="#" onclick="openMap('Sakleshpur Church')">View Location</a>
+    <h2>Invitation</h2>
+    <p>We request the honor of your presence to celebrate this beautiful union.</p>
   </div>
 
   <div class="card">
-    <h3>Reception</h3>
-    <p>Sina Pushetti Hall, Sakleshpur</p>
-    <a class="btn" href="#" onclick="openMap('Sina Pushetti Hall Sakleshpur')">View Location</a>
+    <h2>Venue</h2>
+    <div class="grid">
+      <div>
+        <h3>Church</h3>
+        <p>Sakleshpur Church</p>
+        <a class="btn" onclick="openMap('Sakleshpur Church')">View Location</a>
+      </div>
+      <div>
+        <h3>Reception</h3>
+        <p>Sina Pushetti Hall</p>
+        <a class="btn" onclick="openMap('Sina Pushetti Hall Sakleshpur')">View Location</a>
+      </div>
+    </div>
   </div>
-</section>
 
-<!-- TIMELINE -->
-<section class="section">
-  <h2>Celebration</h2>
-  <div class="timeline">
+  <div class="card">
+    <h2>Celebration</h2>
     <p><b>Church Mass:</b> Time here</p>
     <p><b>Wedding Ceremony:</b> May 23, 2026</p>
   </div>
-</section>
 
-<!-- QUOTE -->
-<section class="section">
-  <h2>Blessing</h2>
-  <p>"Love is patient, love is kind..."</p>
-</section>
+  <div class="card">
+    <h2>Blessing</h2>
+    <p>"Love is patient, love is kind..."</p>
+  </div>
 
-<!-- FINAL -->
-<section class="section">
-  <h2>With Love</h2>
-  <p>We would be honored to have you join us in celebrating this special day.</p>
-</section>
+  <div class="card">
+    <h2>With Love</h2>
+    <p>We would be honored to have you join us in celebrating this special day.</p>
+  </div>
+
+</div>
 
 <script>
-function openMap(location) {
-  window.open("https://www.google.com/maps?q=" + location);
+// AUTO TRANSITION AFTER 2s
+setTimeout(()=>{
+  document.getElementById("hero").style.display="none";
+  document.getElementById("main").style.display="block";
+},2000);
+
+// SCROLL ANIMATION
+const cards=document.querySelectorAll('.card');
+window.addEventListener('scroll',()=>{
+  cards.forEach(card=>{
+    const top=card.getBoundingClientRect().top;
+    if(top<window.innerHeight-50){
+      card.classList.add('show');
+    }
+  });
+});
+
+// MAP
+function openMap(loc){
+  window.open("https://www.google.com/maps?q="+loc);
 }
 
-function toggleMusic() {
-  let music = document.getElementById("music");
-  if (music.paused) {
-    music.play();
-  } else {
-    music.pause();
-  }
+// MUSIC
+function toggleMusic(){
+  let m=document.getElementById("music");
+  m.paused ? m.play() : m.pause();
 }
+
+// PARTICLES
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+for(let i=0;i<50;i++){
+  particles.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    r:Math.random()*2,
+    d:Math.random()
+  });
+}
+
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="rgba(212,175,55,0.3)";
+  ctx.beginPath();
+  particles.forEach(p=>{
+    ctx.moveTo(p.x,p.y);
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2,true);
+  });
+  ctx.fill();
+  update();
+}
+
+function update(){
+  particles.forEach(p=>{
+    p.y+=0.5;
+    if(p.y>canvas.height){
+      p.y=0;
+      p.x=Math.random()*canvas.width;
+    }
+  });
+}
+
+setInterval(draw,30);
 </script>
 
 </body>
