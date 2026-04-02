@@ -1,89 +1,71 @@
-const envelopeScreen = document.getElementById("envelopeScreen");
-const invitationPage = document.getElementById("invitationPage");
-const openButton = document.getElementById("openButton");
-const musicToggle = document.getElementById("musicToggle");
-const bgMusic = document.getElementById("bgMusic");
-const sparkles = document.getElementById("sparkles");
-const revealItems = document.querySelectorAll(".reveal");
+// AUTO TRANSITION
+setTimeout(()=>{
+  document.getElementById("hero").style.display="none";
+  document.getElementById("main").style.display="block";
+},2000);
 
-let invitationOpened = false;
-let autoOpenTimer;
+// SCROLL ANIMATION
+const cards=document.querySelectorAll('.card');
+window.addEventListener('scroll',()=>{
+  cards.forEach(card=>{
+    const top=card.getBoundingClientRect().top;
+    if(top<window.innerHeight-50){
+      card.classList.add('show');
+    }
+  });
+});
 
-function setMusicButtonLabel() {
-  musicToggle.textContent = bgMusic.paused ? "Music Off" : "Music On";
+// MAP
+function openMap(loc){
+  window.open("https://www.google.com/maps?q="+loc);
 }
 
-async function tryPlayMusic() {
-  try {
-    await bgMusic.play();
-  } catch (error) {
-    setMusicButtonLabel();
-  }
+// MUSIC
+function toggleMusic(){
+  let m=document.getElementById("music");
+  m.paused ? m.play() : m.pause();
 }
 
-function showInvitation() {
-  if (invitationOpened) return;
-  invitationOpened = true;
-  clearTimeout(autoOpenTimer);
+// PARTICLES
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
 
-  envelopeScreen.classList.add("opened");
+function resize(){
+  canvas.width=window.innerWidth;
+  canvas.height=window.innerHeight;
+}
+resize();
+window.addEventListener("resize",resize);
 
-  setTimeout(() => {
-    envelopeScreen.classList.add("hidden");
-    invitationPage.classList.remove("hidden");
-    revealOnScroll();
-  }, 2400);
-
-  tryPlayMusic();
+let particles=[];
+for(let i=0;i<50;i++){
+  particles.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    r:Math.random()*2
+  });
 }
 
-function revealOnScroll() {
-  revealItems.forEach((item) => {
-    const rect = item.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 80) {
-      item.classList.add("visible");
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="rgba(212,175,55,0.3)";
+  ctx.beginPath();
+  particles.forEach(p=>{
+    ctx.moveTo(p.x,p.y);
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+  });
+  ctx.fill();
+  update();
+}
+
+function update(){
+  particles.forEach(p=>{
+    p.y+=0.5;
+    if(p.y>canvas.height){
+      p.y=0;
+      p.x=Math.random()*canvas.width;
     }
   });
 }
 
-function createSparkles() {
-  const sparkleCount = 24;
-
-  for (let i = 0; i < sparkleCount; i += 1) {
-    const particle = document.createElement("span");
-    particle.className = "sparkle";
-    particle.style.left = `${Math.random() * 100}%`;
-    particle.style.bottom = `${-10 - Math.random() * 20}px`;
-    particle.style.animationDuration = `${10 + Math.random() * 8}s`;
-    particle.style.animationDelay = `${Math.random() * 6}s`;
-    particle.style.setProperty("--drift-x", `${(Math.random() - 0.5) * 90}px`);
-    particle.style.opacity = `${0.25 + Math.random() * 0.45}`;
-    sparkles.appendChild(particle);
-  }
-}
-
-openButton.addEventListener("click", showInvitation);
-
-musicToggle.addEventListener("click", async () => {
-  if (bgMusic.paused) {
-    await tryPlayMusic();
-  } else {
-    bgMusic.pause();
-  }
-  setMusicButtonLabel();
-});
-
-document.addEventListener("visibilitychange", () => {
-  if (!document.hidden && !bgMusic.paused && invitationOpened) {
-    tryPlayMusic();
-  }
-});
-
-window.addEventListener("scroll", revealOnScroll);
-window.addEventListener("load", async () => {
-  createSparkles();
-  setMusicButtonLabel();
-  autoOpenTimer = setTimeout(showInvitation, 5000);
-  await tryPlayMusic();
-  revealOnScroll();
-});
+setInterval(draw,30);
